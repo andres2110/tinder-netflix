@@ -1,16 +1,12 @@
 import React from "react";
-//import "react-native-gesture-handler";
 import { View, Text } from "react-native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { NavigationContainer } from "@react-navigation/native";
 import {
   useFonts,
   OldStandardTT_400Regular,
 } from "@expo-google-fonts/old-standard-tt";
-import Home from "./screens/Home";
-import Favorites from "./screens/Favorites";
-import Header from "./components/commons/Header";
-const Drawer = createDrawerNavigator();
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import Main from "./components/Main";
 export default function App() {
   let [fontsLoaded] = useFonts({ OldStandardTT_400Regular });
   if (!fontsLoaded) {
@@ -21,26 +17,8 @@ export default function App() {
     );
   }
   return (
-    <NavigationContainer>
-      <Drawer.Navigator screenOptions={styles.screenOptions}>
-        <Drawer.Screen name="Home" component={Home} />
-        <Drawer.Screen name="Favorites" component={Favorites} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <Main></Main>
+    </Provider>
   );
-}
-
-const styles={
-  screenOptions:{
-    drawerStyle: {
-      backgroundColor: "#FAC213",
-      width: 240,
-    },
-    header: Header,
-    headerStyle:{
-      height: '100%'
-    },
-    drawerActiveTintColor:"#D61C4E"
-  },
-  
 }
