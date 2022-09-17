@@ -17,14 +17,18 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection:"row",
     justifyContent:"space-between",
-   // flexDirection: "row-reverse",
     backgroundColor: "#FAC213",
     width: "100%",
+    borderBottomStartRadius:5,
+    borderBottomEndRadius:5,
+    shadowColor:"black",
+    shadowOpacity:2
   },
   titleText: {
-    fontSize: 23,
+    fontSize: 25,
     color: "#D61C4E",
-    fontFamily: "OldStandardTT_400Regular",
+    fontFamily: "OldStandardTT_700Bold",
+    fontWeight:"bold",
   },
 });
 export default Header;

@@ -5,6 +5,7 @@ import { API_KEY, API_URL } from "../resources/constants";
 const oInitialState = {
   aMovies: [],
   status: "idle",
+  aMoviesSelected:[]
 };
 
 export const fnFetchMovies = createAsyncThunk(
@@ -23,7 +24,11 @@ export const fnFetchMovies = createAsyncThunk(
 export const moviesSlice = createSlice({
   name: "movies",
   initialState: oInitialState,
-  reducers: {},
+  reducers: {
+    addLiked(state,action){
+      state.aMoviesSelected.push(action.payload);
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fnFetchMovies.pending, (state, action) => {
@@ -41,5 +46,5 @@ export const moviesSlice = createSlice({
       });
   },
 });
-
+export const { addLiked } = moviesSlice.actions
 export default moviesSlice.reducer;

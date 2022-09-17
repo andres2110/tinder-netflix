@@ -1,57 +1,121 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import { StyleSheet, View, Text, Dimensions } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { fnFetchMovies } from "../redux/moviesSlice";
-import { getMoviesToDisplay } from "../redux/selectors";
+import { fnFetchMovies, addLiked } from "../redux/moviesSlice";
+import { getMoviesToDisplay, getSelectedMovies } from "../redux/selectors";
 import Movie from "../components/commons/Movie";
+import { IMAGE_URL, MOVIES, MOVIES_TEST } from "../resources/constants";
+import Options from "../components/home/Options";
+import Carousel from "react-native-snap-carousel";
 
 const Home = () => {
-  const [iActualMovieId, setActualMovie] = React.useState(0);
-  const aMovies = useSelector(getMoviesToDisplay);
+  const [aMovies, setMovies] = React.useState(MOVIES_TEST);
+  const [iIndex, setIndex] = React.useState(0);
+  const [oState, setState] = React.useState({
+    isTouch: false,
+    status: "",
+    index: 0,
+    isSnap: false,
+  });
+  const aSelectedMovies = useSelector(getSelectedMovies);
   const fnDispatch = useDispatch();
   React.useEffect(() => {
-    fnDispatch(fnFetchMovies());
-  }, [fnDispatch]);
+    if (oState.isTouch) {
+      setMovies((aMoviesP) => {
+        fnDispatch(
+          addLiked({ ...aMoviesP[oState.index], status: oState.status })
+        );
+        return aMoviesP.filter((oMovie, index) => index !== oState.index);
+      });
+      setState((oStateP) => ({
+        ...oStateP,
+        isTouch: false,
+        status: "",
+        index: 0,
+      }));
+    }
+  }, [oState]);
+  const fnUpdateIndex = () => {
+    if (oState.isSnap) {
+      setState((oStateP) => ({ ...oStateP, isSnap: false }));
+      return;
+    }
+    let sStatus = "";
+    let iCurrentIndex = oCarousel.currentIndex;
+    if (
+      iCurrentIndex > iIndex ||
+      (iIndex === aMovies.length - 1 && iCurrentIndex === 0)
+    )
+      sStatus = "liked";
+    if (
+      iCurrentIndex < iIndex ||
+      (iIndex === 0 && iCurrentIndex === aMovies.length - 1)
+    )
+      sStatus = "unliked";
+    setState({
+      isTouch: true,
+      status: sStatus,
+      index: iIndex,
+      isSnap: true,
+    });
 
+  };
+  const fnUpdateData = () => {
+    setIndex(oCarousel.currentIndex);
+  };
   const fnLikedMovie = () => {
-    setActualMovie((iLastID) => {
-      iLastID++;
-      if (iLastID === aMovies.lenght) {
-        iLastID = 0;
-      }
-      return iLastID;
+    setState({
+      isTouch: true,
+      status: "liked",
+      index: oCarousel.currentIndex,
+      isSnap: true,
+    });
+    oCarousel.snapToNext();
+  };
+  const fnUnlikeMovie = () => {
+    oCarousel.snapToPrev();
+    setState({
+      isTouch: true,
+      status: "unliked",
+      index: oCarousel.currentIndex,
+      isSnap: true,
     });
   };
+  let oCarousel = Carousel;
 
-
+  const { width } = Dimensions.get("window");
   return (
     <View style={styles.container}>
-      <Movie {...aMovies[iActualMovieId]} isReadMore={false} animation="bounceInRight"/>
-      <View style={styles.options}>
-        <FontAwesome name="close" size={35} color="white" />
-        <FontAwesome
-          name="check"
-          size={35}
-          color="#27e246"
-          onPress={fnLikedMovie}
+      {aMovies.length > 0 ? (
+        <Carousel
+          ref={(ref) => {
+            oCarousel = ref;
+          }}
+          data={aMovies}
+          renderItem={({ item }) => {
+            return <Movie {...item} isReadMore={false} />;
+          }}
+          itemWidth={width}
+          sliderWidth={width}
+          layout="tinder"
+          layoutCardOffset={9}
+          onScrollEndDrag={fnUpdateData}
+          loop
+          onSnapToItem={fnUpdateIndex}
         />
-      </View>
+      ) : (
+        <View>
+          <Text>No tienes más peliculas</Text>
+        </View>
+      )}
+      <Options onLiked={fnLikedMovie} onUnliked={fnUnlikeMovie} />
     </View>
   );
 };
 export default Home;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FEF9A7",
-  },
-  options: {
-    flex: 1.2,
-    backgroundColor: "#D61C4E",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
+    backgroundColor: "white",
   },
 });
