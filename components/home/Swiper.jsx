@@ -16,25 +16,31 @@ const Swiper = (props) => {
   React.useEffect(() => {
     if (props.action === "liked" || props.action === "unliked") {
       props.action === "liked"
-        ? oCarousel.snapToNext()
-        : oCarousel.snapToPrev();
+        ? oCarousel.snapToNext(false)
+        : oCarousel.snapToPrev(false);
       setISTouch(true);
       fnUpdateData(props.action, oCarousel.currentIndex);
       props.onSetAction("none");
     }
   }, [props.action]);
   const fnUpdateData = (sAction, iIndex) => {
-    fnDispatch(addLiked({ ...aMovies[iIndex], status: sAction }));
+    let oMovie = { ...aMovies[iIndex], status: sAction };
+    fnDispatch(addLiked(oMovie));
+    fnVerifyMatch(oMovie,sAction);
     setMovies((aMoviesP) =>
       aMoviesP.filter((oMovie, index) => index !== iIndex)
     );
   };
-  const fnUpdateIndex = () => {
+  const fnVerifyMatch = (oMovie,sAction)=>{
+    if(sAction!=="liked") return; 
+    let bIsMatch = aRandomMatch.filter((value)=>value===oMovie.id).length > 0;
+    if(bIsMatch) props.onMatch(oMovie);
+  }
+  const fnDoSnap = () => {
     if (bIsTouch) {
       setISTouch(false);
       return;
     }
-    console.log("entro");
     let sStatus = "";
     let iLastIdx = aMovies.length - 1;
     let iCurrentIndex = oCarousel.currentIndex;
@@ -61,7 +67,7 @@ const Swiper = (props) => {
       layoutCardOffset={9}
       onScrollEndDrag={() => setIndex(oCarousel.currentIndex)}
       loop
-      onSnapToItem={fnUpdateIndex}
+      onSnapToItem={fnDoSnap}
     />
   );
 };

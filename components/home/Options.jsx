@@ -21,19 +21,22 @@ const styles = StyleSheet.create({
   options: {
     flex: 0.15,
     flexDirection: "row",
+    width: "100%",
+    justifyContent:"center",
   },
   unlike: {
     backgroundColor: "#D61C4E",
     borderRightColor: "white",
     borderRightWidth: 1,
     height: "100%",
-    width: width / 2,
+    width:100,
     alignItems: "center",
     justifyContent: "center",
     borderRadius:"100%"
   },
   like: {
     borderLeftColor: "white",
+    marginLeft:"10%",
     borderLeftWidth: 1,
     borderRightColor: "#D61C4E",
   },

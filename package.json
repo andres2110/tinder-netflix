@@ -10,6 +10,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo-google-fonts/lobster": "^0.2.2",
     "@expo-google-fonts/old-standard-tt": "^0.2.2",
     "@react-navigation/drawer": "^6.4.2",
     "@react-navigation/native": "^6.0.10",

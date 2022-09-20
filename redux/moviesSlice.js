@@ -1,12 +1,14 @@
 import { createSlice, createAsyncThunk,createAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { API_KEY, API_URL, fnGetAleatorios, MOVIES_TEST } from "../resources/constants";
-
+import { API_KEY, API_URL, fnGetAleatorios, MOVIES, MOVIES_TEST } from "../resources/constants";
+let aRandomMatchs = MOVIES;
+let iPart = (3.5/4);
+let iTotalRandoms = Math.floor(aRandomMatchs.length*iPart);
 const oInitialState = {
-  aMovies: MOVIES_TEST,
+  aMovies: MOVIES,
   status: "initial",
   aMoviesSelected:[],
-  aRandomMatchs:fnGetAleatorios(3,MOVIES_TEST.length)
+  aRandomMatchs:fnGetAleatorios(iTotalRandoms,MOVIES.length)
 };
 
 export const fnFetchMovies = createAsyncThunk(

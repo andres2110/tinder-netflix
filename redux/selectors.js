@@ -13,5 +13,5 @@ export const getRandomMatchs = (store) => {
     aRandomIds.forEach(index => {
         aRandomMatchs.push(aMovies[index].id);
     });
-    return aRandomIds;
+    return aRandomMatchs;
 }
