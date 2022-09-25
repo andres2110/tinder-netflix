@@ -1,41 +1,30 @@
 import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, SafeAreaView, Text } from "react-native";
 import { useSelector } from "react-redux";
-import Favorite from "../components/favorites/Favorite";
 import { getSelectedMovies } from "../redux/selectors";
+import  ListOfMovies  from "../components/favorites/ListOfMovies";
 
 const Favorites = () => {
   const aSelectMovies = useSelector(getSelectedMovies);
-  const aLikedMovies = aSelectMovies.filter(
-    (oMovie) => oMovie.status === "liked"
-  );
-  const aUnlikedMovies = aSelectMovies.filter(
-    (oMovie) => oMovie.status === "unliked"
-  );
+  let aMatchedMovies = aSelectMovies.filter((oMovie)=> oMovie.status === "matched");
+  console.log(aMatchedMovies)
   return (
-    <View style={styles.container}>
-      <View>
-        <View>
-          <Text>Liked</Text>
-          {aLikedMovies.map((oMovie) => {
-            return <Text key={oMovie.id}> - {oMovie.title}</Text>;
-          })}
-        </View>
-        <View>
-          <Text>Unliked</Text>
-          {aUnlikedMovies.map((oMovie) => {
-            return <Text key={oMovie.id}> - {oMovie.title}</Text>;
-          })}
-        </View>
-      </View>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.match}>Matches</Text>
+      <ListOfMovies movies ={aMatchedMovies}/>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FEF9A7",
+    // paddingHorizontal: "10%",
+  },
+  match: {
+    fontFamily: "Allerta_400Regular",
+    fontSize: 25,
+    // color: "#158c0f",
   },
 });
 

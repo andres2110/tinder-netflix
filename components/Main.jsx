@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import Home from "../screens/Home";
 import Favorites from "../screens/Favorites";
 import Header from "./commons/Header";
+import Details from "../screens/Details";
 const Drawer = createDrawerNavigator();
 
 export default Main = () => {
@@ -12,6 +13,13 @@ export default Main = () => {
       <Drawer.Navigator screenOptions={styles.screenOptions}>
         <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Favorites" component={Favorites} />
+        <Drawer.Screen
+          options={{
+            drawerItemStyle: { height: 0 },
+          }}
+          name="Details"
+          component={Details}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );

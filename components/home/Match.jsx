@@ -9,6 +9,10 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 const Match = (props) => {
+  const fnNavigateToMatchs= () =>{
+    props.onClose();
+    props.navigation.navigate('Details');
+  }
   return (
     <Modal animationType="slide" transparent={true} visible={props.visible}>
       <View style={styles.modal}>
@@ -22,7 +26,7 @@ const Match = (props) => {
           resizeMode="stretch"
         />
         <View style={styles.options}>
-          <TouchableOpacity style={styles.buttons}>
+          <TouchableOpacity style={styles.buttons} onPress={fnNavigateToMatchs}>
             <Text style={{fontWeight:"bold"}}>Ver Matchs</Text>
             <MaterialCommunityIcons name="robot-love" size={24} color="#FAC213" />
           </TouchableOpacity>

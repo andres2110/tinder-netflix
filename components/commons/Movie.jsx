@@ -1,11 +1,15 @@
 import React from "react";
 import { Image, StyleSheet, View, Text, Dimensions } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 
 const Movie = (props) => {
   const [isReadMore, setReadMore] = React.useState(props.isReadMore);
   return (
     <View style={styles.main} animation="slideInRight" is>
-      <Text style={{fontSize:20,fontWeight:"bold"}}>{props.title}</Text>
+      <Text style={{ fontSize: 20, fontWeight: "bold" }}>{props.title} </Text>
+      <Text style={{ fontWeight: "bold"}}>
+        {props.imDbRating} <FontAwesome name="star" size={24} color="#FAC213" />
+      </Text>
       <Image style={styles.img} source={{ uri: props.image }} />
       {!isReadMore ? (
         <Text onPress={() => setReadMore((bValue) => !bValue)}>
@@ -19,20 +23,20 @@ const Movie = (props) => {
 };
 const styles = StyleSheet.create({
   main: {
-    flex:1,
-    borderRadius:30,
-    marginHorizontal:"10%",
-    marginBottom:"5%",
+    flex: 1,
+    borderRadius: 30,
+    marginHorizontal: "10%",
+    marginBottom: "5%",
     justifyContent: "space-around",
     alignItems: "center",
     backgroundColor: "#f5ed8a",
-    borderBottomColor:"#FAC213",
-    borderBottomWidth:5,
+    borderBottomColor: "#FAC213",
+    borderBottomWidth: 5,
   },
   img: {
     width: 200,
     height: 300,
-    borderRadius:10
+    borderRadius: 10,
   },
   description: {
     paddingHorizontal: 9,

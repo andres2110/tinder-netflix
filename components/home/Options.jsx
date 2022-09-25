@@ -4,14 +4,14 @@ import { FontAwesome } from "@expo/vector-icons";
 const Options = (props) => {
   return (
     <View style={styles.options}>
-      <TouchableOpacity style={styles.unlike} onPress={props.onUnliked}>
-        <FontAwesome name="close" size={35} color="white" />
+      <TouchableOpacity style={styles.unlike} onPress={props.onLiked}>
+        <FontAwesome name="check" size={35} color="#27e246" />
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.unlike, styles.like]}
-        onPress={props.onLiked}
+        onPress={props.onUnliked}
       >
-        <FontAwesome name="check" size={35} color="#27e246" />
+        <FontAwesome name="close" size={35} color="white" />
       </TouchableOpacity>
     </View>
   );
@@ -22,21 +22,21 @@ const styles = StyleSheet.create({
     flex: 0.15,
     flexDirection: "row",
     width: "100%",
-    justifyContent:"center",
+    justifyContent: "center",
   },
   unlike: {
     backgroundColor: "#D61C4E",
     borderRightColor: "white",
     borderRightWidth: 1,
     height: "100%",
-    width:100,
+    width: 100,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius:"100%"
+    borderRadius: "100%",
   },
   like: {
     borderLeftColor: "white",
-    marginLeft:"10%",
+    marginLeft: "10%",
     borderLeftWidth: 1,
     borderRightColor: "#D61C4E",
   },

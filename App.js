@@ -7,6 +7,7 @@ import {
   OldStandardTT_400Regular_Italic,
 } from "@expo-google-fonts/old-standard-tt";
 import { Lobster_400Regular } from "@expo-google-fonts/lobster";
+import { Allerta_400Regular } from "@expo-google-fonts/allerta";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import Main from "./components/Main";
@@ -16,6 +17,7 @@ export default function App() {
     OldStandardTT_700Bold,
     Lobster_400Regular,
     OldStandardTT_400Regular_Italic,
+    Allerta_400Regular
   });
   if (!fontsLoaded) {
     return (

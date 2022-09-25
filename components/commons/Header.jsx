@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 25,
     color: "#D61C4E",
-    fontFamily: "OldStandardTT_700Bold",
+    fontFamily: "Allerta_400Regular",
     fontWeight:"bold",
   },
 });

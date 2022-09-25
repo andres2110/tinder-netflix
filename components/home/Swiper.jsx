@@ -24,18 +24,24 @@ const Swiper = (props) => {
     }
   }, [props.action]);
   const fnUpdateData = (sAction, iIndex) => {
-    let oMovie = { ...aMovies[iIndex], status: sAction };
-    fnDispatch(addLiked(oMovie));
-    fnVerifyMatch(oMovie,sAction);
+    fnVerifyMatch(sAction);
     setMovies((aMoviesP) =>
       aMoviesP.filter((oMovie, index) => index !== iIndex)
     );
   };
-  const fnVerifyMatch = (oMovie,sAction)=>{
-    if(sAction!=="liked") return; 
-    let bIsMatch = aRandomMatch.filter((value)=>value===oMovie.id).length > 0;
-    if(bIsMatch) props.onMatch(oMovie);
-  }
+  const fnVerifyMatch = (sAction) => {
+    if (sAction !== "liked") return;
+    let sStatus = "";
+    let oMovie = aMovies[iIndex];
+    if (aRandomMatch.filter((value) => value === oMovie.id).length > 0) {
+      props.onMatch(oMovie);
+      sStatus = "matched";
+    } else {
+      sStatus = "liked";
+    }
+    oMovie = { ...oMovie, status: sStatus };
+    fnDispatch(addLiked(oMovie));
+  };
   const fnDoSnap = () => {
     if (bIsTouch) {
       setISTouch(false);

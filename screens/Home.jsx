@@ -4,7 +4,7 @@ import Options from "../components/home/Options";
 import Swiper from "../components/home/Swiper";
 import Match from "../components/home/Match";
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [sAction, setAction] = React.useState("None");
   const [oMovieMatch, setMovieMatch] = React.useState({});
   const [bIsMatch, setIsMatch] = React.useState(false);
@@ -19,6 +19,7 @@ const Home = () => {
           visible={bIsMatch}
           onRequestClose
           movieMatch={oMovieMatch}
+          navigation = {navigation}
           onClose={() => {
             setIsMatch(false);
           }}
