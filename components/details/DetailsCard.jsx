@@ -10,7 +10,7 @@ const DetailsCard = ({ movieData, navigation }) => {
   const oMovie = movieData;
   return (
     <View>
-      {/* <Ionicons
+      <Ionicons
         name="arrow-back"
         size={24}
         color="black"
@@ -18,7 +18,7 @@ const DetailsCard = ({ movieData, navigation }) => {
         onPress={() => {
           navigation.navigate("Favorites");
         }}
-      /> */}
+      />
       <Text style={{ fontWeight: "bold", fontSize: 26, alignSelf: "center" }}>
         {oMovie.title}
       </Text>

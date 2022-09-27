@@ -12,7 +12,7 @@ import Message from "../components/commons/Message";
 const Details = ({ route, navigation }) => {
   const { idMovie } = route.params;
   const oMovie = MOVIE_INFO;
-  const sStatus = STATUS.READY;
+  const sStatus = STATUS.ERROR;
   // const fnDispatch = useDispatch();
   // const sStatus = useSelector(getStatus);
   // React.useEffect(() => {
@@ -32,24 +32,10 @@ const Details = ({ route, navigation }) => {
       );
       break;
     case STATUS.ERROR:
-      Component = <Message message={MESSAGES.E_DETAILS} />;
+      Component = <Message message={MESSAGES.E_DETAILS} routeName={"Favorites"}/>;
       break;
   }
-  return (
-    <View style={styles.container}>
-      <Ionicons
-        name="arrow-back"
-        size={30}
-        color="black"
-        style={{ position: "absolute" , paddingTop:"25%"}}
-        onPress={() => {
-          console.log("Presionor")
-          navigation.navigate("Favorites");
-        }}
-      />
-      {Component}
-    </View>
-  );
+  return <View style={styles.container}>{Component}</View>;
 };
 const styles = StyleSheet.create({
   container: {
