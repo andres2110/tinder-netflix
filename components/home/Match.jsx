@@ -11,7 +11,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const Match = (props) => {
   const fnNavigateToMatchs= () =>{
     props.onClose();
-    props.navigation.navigate('Details');
+    props.navigation.navigate('Favorites');
   }
   return (
     <Modal animationType="slide" transparent={true} visible={props.visible}>

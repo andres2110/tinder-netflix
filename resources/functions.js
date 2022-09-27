@@ -11,3 +11,19 @@ export const fnReplaceTitle= (sTitle) => {
     })
     return sNewTitle;
 }
+
+export const fnGetAleatorios = (iTotalRandom,iLength) => {
+    var aRandoms = [];
+    for (let index = 0; index < iTotalRandom; index++) {
+      var iRandom = undefined;
+      while(true){
+        iRandom = Math.floor(Math.random()*iLength);
+        let lenght = aRandoms.filter((value)=> value === iRandom ).length;
+        if(lenght == 0){
+          aRandoms.push(iRandom);
+          break;
+        }
+      }
+    }
+    return aRandoms;
+}

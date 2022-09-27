@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image } from "react-native";
 import { IMAGE_URL } from "../../resources/constants";
 import { Entypo } from "@expo/vector-icons";
 
-const Favorite = () =>{
+const Favorite = ({navigation}) =>{
     return(
         <View style={styles.box}>
         <Image style={styles.img} source={{ uri: IMAGE_URL }}></Image>

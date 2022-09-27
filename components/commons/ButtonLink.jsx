@@ -12,7 +12,7 @@ const ButtonLink = ({ url, title }) => {
     }
   }, [url]);
 
-  return <Button title={title} onPress={handlePress} />;
+  return <Button title={title} onPress={handlePress}/>;
 };
 
 export default ButtonLink;

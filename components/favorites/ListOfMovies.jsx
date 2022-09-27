@@ -3,15 +3,15 @@ import { FlatList } from "react-native";
 import MovieItem from "./MovieItem";
 
 const ListOfMovies = (props) => {
-    console.log(props.movies);
   return (
     <FlatList
+      disableScrollViewPanResponder={false}
       horizontal = {false}
       style={{marginHorizontal:10}}
       showsVerticalScrollIndicator={false}
       numColumns = {2}
       data={props.movies}
-      renderItem={({ item }) => <MovieItem {...item} />}
+      renderItem={({ item }) => <MovieItem {...item} navigation={props.navigation}/>}
       keyExtractor = {item=>item.id}
     />
   );

@@ -4,14 +4,13 @@ import { useSelector } from "react-redux";
 import { getSelectedMovies } from "../redux/selectors";
 import  ListOfMovies  from "../components/favorites/ListOfMovies";
 
-const Favorites = () => {
+const Favorites = ({navigation}) => {
   const aSelectMovies = useSelector(getSelectedMovies);
   let aMatchedMovies = aSelectMovies.filter((oMovie)=> oMovie.status === "matched");
-  console.log(aMatchedMovies)
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.match}>Matches</Text>
-      <ListOfMovies movies ={aMatchedMovies}/>
+      <ListOfMovies movies ={aMatchedMovies} navigation={navigation}/>
     </SafeAreaView>
   );
 };

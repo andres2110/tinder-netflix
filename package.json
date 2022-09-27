@@ -12,7 +12,6 @@
   "dependencies": {
     "@expo-google-fonts/allerta": "^0.2.2",
     "@expo-google-fonts/lobster": "^0.2.2",
-    "@expo-google-fonts/old-standard-tt": "^0.2.2",
     "@react-navigation/drawer": "^6.4.2",
     "@react-navigation/native": "^6.0.10",
     "@reduxjs/toolkit": "^1.8.5",

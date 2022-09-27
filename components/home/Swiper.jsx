@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, Dimensions } from "react-native";
+import { Dimensions } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { addLiked } from "../../redux/moviesSlice";
 import { getMoviesToDisplay, getRandomMatchs } from "../../redux/selectors";
@@ -16,20 +16,20 @@ const Swiper = (props) => {
   React.useEffect(() => {
     if (props.action === "liked" || props.action === "unliked") {
       props.action === "liked"
-        ? oCarousel.snapToNext(false)
-        : oCarousel.snapToPrev(false);
+        ? oCarousel.snapToNext(true)
+        : oCarousel.snapToPrev(true);
       setISTouch(true);
       fnUpdateData(props.action, oCarousel.currentIndex);
       props.onSetAction("none");
     }
   }, [props.action]);
   const fnUpdateData = (sAction, iIndex) => {
-    fnVerifyMatch(sAction);
+    fnVerifyMatch(sAction,iIndex);
     setMovies((aMoviesP) =>
       aMoviesP.filter((oMovie, index) => index !== iIndex)
     );
   };
-  const fnVerifyMatch = (sAction) => {
+  const fnVerifyMatch = (sAction,iIndex) => {
     if (sAction !== "liked") return;
     let sStatus = "";
     let oMovie = aMovies[iIndex];
